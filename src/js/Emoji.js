@@ -170,7 +170,7 @@ export default class Emoji {
         const emote = Converters.withEnvironment()
                                 .replace_colons(this.getColons());
 
-        return this._getWrapper().append(emote);
+        return this._getWrapper().append(this.getCharacter());
     }
 
     /**

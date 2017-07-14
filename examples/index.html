@@ -13,8 +13,15 @@
             height: 800px;
             background: #eee;
         }
-        
-        #text-input {
+
+        .wrapper{
+            position: relative;
+            margin: 0 auto;
+            width: 330px;
+            padding: 20px 0;
+        }
+
+        .wrapper .input {
             position: relative;
             display: block;
             margin: 0 auto;
@@ -23,36 +30,70 @@
             border: 1px solid #eee;
             background: #fff;
         }
-        
-        #text-input:empty:before{
+
+        .wrapper .input:empty:before{
             content: attr(placeholder);
             display: block;
         }
-        
-        .wrapper{
-            position: relative;
-            top: 100px;
-            margin: 0 auto;
-            width: 330px;
-        }
-        
-        #icon{
+
+        .wrapper .icon {
             color: #000;
             position: absolute;
             display: block;
-            right: 0;
+            right: 24px;
+            bottom: 24px;
         }
-        #icon:hover{
+
+        .wrapper .icon:hover{
             cursor: pointer;
         }
+
+        .input-wrapper{
+            display: flex;
+            flex-direction: row;
+            width: 330px;
+            margin: 0 auto;
+            padding: 20px 0;
+            border: 1px solid #eee;
+            background: #fff;
+            padding: 4px;
+        }
+
+        .input-wrapper input {
+            margin: 0 auto;
+            width: 100%;
+            border: none;
+        }
+
+        .input-wrapper input:focus {
+            outline: none;
+        }
+
+        .input-wrapper input:empty:before{
+            content: attr(placeholder);
+            display: block;
+        }
+
+        .input-wrapper .icon {
+            color: #000;
+        }
+
+        .input-wrapper .icon:hover{
+            cursor: pointer;
+        }
+
     </style>
 </head>
 <body>
 
-<div id = "container">
-    <div class = "wrapper">
-        <div contenteditable="true" placeholder = "Type here" id = "text-input"></div>
-        <i class="fa fa-smile-o" id = "icon" aria-hidden="true"></i>
+<div id="container">
+    <div class="wrapper" id="content-edit">
+        <div class="input" contenteditable="true" placeholder="Type here"></div>
+        <i class="fa fa-smile-o icon" aria-hidden="true"></i>
+    </div>
+    <div class="input-wrapper" id="content-input">
+        <input class="input" placeholder="Type here"></input>
+        <i class="fa fa-smile-o icon" aria-hidden="true"></i>
     </div>
 </div>
 

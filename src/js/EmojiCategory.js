@@ -68,6 +68,8 @@ export default class EmojiCategory {
                 }
             }
         });
+
+        this._clearSearch();
     }
 
     get offset_top (){
@@ -137,12 +139,14 @@ export default class EmojiCategory {
         }
         else{
             this.$title.addClass('inactive');
-
             const regexp = new RegExp(this.search_term.toLowerCase());
-
             this.emojis.forEach(emoji => {
                 if(emoji.matchesSearchTerm(regexp)){
-                   emoji.$emoji.show();
+                  if (emoji.getUnified().length > 4) {
+                    emoji.$emoji.hide();
+                  } else {
+                    emoji.$emoji.show();
+                  }
                 }
                 else{
                     emoji.$emoji.hide();
@@ -159,7 +163,13 @@ export default class EmojiCategory {
      */
     _clearSearch() {
         this.$title.removeClass('inactive');
-        this.emojis.forEach(emoji => emoji.$emoji.show());
+        this.emojis.forEach(emoji => {
+            if (emoji.getUnified().length > 4) {
+              emoji.$emoji.hide();
+            } else {
+              emoji.$emoji.show();
+            }
+        });
 
         return this;
     }

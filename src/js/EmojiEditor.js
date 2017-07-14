@@ -62,7 +62,6 @@ export default class EmojiEditor {
         if(this.cursor_position){
             EmojiEditor.restoreSelection(this.cursor_position);
         }
-
         if(this._is_content_editable){
             let node;
             if(EmojiEditor.supportsUnified()){
@@ -72,18 +71,16 @@ export default class EmojiEditor {
             else {
                 node = EmojiEditor.pasteHtml(emoji.getHtml());
             }
-
-            $(this._input).trigger('change').trigger('input');
-
+            $(this._input).trigger('change', [true]).trigger('input', [true]);
             return node;
         }
-        else{
-            var ret = this.pasteInputText(emoji.getColons());
-            $(this._input).trigger('change').trigger('input');
+        else {
+            let text = emoji.getCharacter();
+            var ret = this.pasteInputText(text);
+            $(this._input).trigger('change', [true]).trigger('input', [true]);
             return ret;
         }
     }
-
 
     /**
      * Pastes text at the cursor while preserving cursor position.
@@ -92,7 +89,6 @@ export default class EmojiEditor {
      * @return {String}
      */
     pasteInputText(text){
-
         const cursor_position = this._input.selectionStart;
         const current_length  = this._input.value.length;
         this._input.value     = this._input.value.substr(0, cursor_position)
@@ -100,7 +96,6 @@ export default class EmojiEditor {
                                 + this._input.value.substr(cursor_position);
 
         this.setInputCaretPosition(cursor_position + this._input.value.length - current_length);
-
         return text;
     }
 
