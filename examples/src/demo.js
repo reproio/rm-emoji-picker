@@ -1,7 +1,6 @@
 import $ from 'jquery';
 import EmojiPicker from './../../src/js/EmojiPicker';
 
-
 const setupPicker = function(container) {
   const input = container.querySelector('.input');
   const icon = container.querySelector('.icon');
@@ -17,7 +16,6 @@ const setupPicker = function(container) {
   });
 
   picker.listenOn(icon, container, input);
-
   $(input).on('change', (event) => {
     console.log('input:val',event.target.value );
   });

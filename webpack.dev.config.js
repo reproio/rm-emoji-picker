@@ -2,14 +2,14 @@
  * Created by dondoco7 on 7/14/17.
  */
 const webpack = require('webpack');
+const path = require('path');
 
 module.exports = {
   entry: {
     demo: './examples/src/demo.js'
   },
-  cache: true,
   output: {
-    path: __dirname + '/examples/build/',
+    path: path.resolve(__dirname, './examples/build/'),
     filename: '[name].js',
     libraryTarget: 'umd'
   },
@@ -18,12 +18,12 @@ module.exports = {
     loaders: [
       {
         test: /\.js$/,
-        loader: 'babel?presets[]=es2015'
+        loader: 'babel-loader?presets[]=es2015'
       },
       {
         test: /\.mustache$/,
-        loader: 'mustache?minify'
+        loader: 'mustache-loader?minify'
       }
     ]
   }
-}
+};

@@ -166,10 +166,6 @@ export default class Emoji {
      * @return {string|jQuery}
      */
     getEmojiForPlatform(){
-
-        const emote = Converters.withEnvironment()
-                                .replace_colons(this.getColons());
-
         return this._getWrapper().append(this.getCharacter());
     }
 

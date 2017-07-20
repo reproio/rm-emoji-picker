@@ -1,36 +1,33 @@
 /**
- * Created by rbmenke on 1/19/17.
+ * Created by dondoco7 on 7/14/17.
  */
-const webpack = require('webpack')
-const glob = require('glob')
+const webpack = require('webpack');
+const path = require('path');
 
 module.exports = {
   entry: {
     EmojiPicker: './src/js/EmojiPicker.js'
   },
-  cache: true,
   output: {
-    path: './dist/',
+    path: path.resolve(__dirname, 'dist'),
     filename: '[name].js',
     libraryTarget: 'umd'
   },
-  //uncomment the devtool key for development so that webpack will provide a map to your source
-  devtool: 'source-map',
+  devtool  : '#inline-source-map',
   module: {
     loaders: [
       {
         test: /\.js$/,
-        loader: 'babel?presets[]=es2015'
+        loader: 'babel-loader?presets[]=es2015'
       },
       {
         test: /\.mustache$/,
-        loader: 'mustache?minify'
+        loader: 'mustache-loader?minify'
       }
     ]
   },
-  //Since jQuery is a peer-dependency, we leave it here as an external
   externals: {
-    'jquery': 'jquery'
+    "jquery" : "jquery"
   },
   plugins: [
     //The uglify plugin is used to minify and obfuscate the source code
@@ -40,4 +37,4 @@ module.exports = {
       }
     })
   ]
-}
+};

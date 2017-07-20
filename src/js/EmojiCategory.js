@@ -141,12 +141,8 @@ export default class EmojiCategory {
             this.$title.addClass('inactive');
             const regexp = new RegExp(this.search_term.toLowerCase());
             this.emojis.forEach(emoji => {
-                if(emoji.matchesSearchTerm(regexp)){
-                  if (emoji.getUnified().length > 4) {
-                    emoji.$emoji.hide();
-                  } else {
-                    emoji.$emoji.show();
-                  }
+                if(this._canShowEmoji(emoji) && emoji.matchesSearchTerm(regexp)){
+                  emoji.$emoji.show();
                 }
                 else{
                     emoji.$emoji.hide();
@@ -164,7 +160,7 @@ export default class EmojiCategory {
     _clearSearch() {
         this.$title.removeClass('inactive');
         this.emojis.forEach(emoji => {
-            if (emoji.getUnified().length > 4) {
+            if (this._canShowEmoji(emoji)) {
               emoji.$emoji.hide();
             } else {
               emoji.$emoji.show();
@@ -172,5 +168,9 @@ export default class EmojiCategory {
         });
 
         return this;
+    }
+
+    _canShowEmoji(emoji) {
+      return emoji.getUnified().length > 4;
     }
 }
