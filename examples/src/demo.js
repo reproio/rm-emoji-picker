@@ -31,9 +31,4 @@ $(document).ready(() => {
   const contentInput = document.getElementById('content-input');
   const inputPicker = setupPicker(contentInput);
 
-  setInterval(() => {
-    console.log(contentPicker.getText());
-    console.log(inputPicker.getText());
-  }, 3000);
-
-})
+});

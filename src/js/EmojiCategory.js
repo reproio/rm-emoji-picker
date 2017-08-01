@@ -160,17 +160,23 @@ export default class EmojiCategory {
     _clearSearch() {
         this.$title.removeClass('inactive');
         this.emojis.forEach(emoji => {
-            if (this._canShowEmoji(emoji)) {
-              emoji.$emoji.hide();
-            } else {
+            if (this._filter(emoji)) {
               emoji.$emoji.show();
+            } else {
+              emoji.$emoji.hide();
             }
         });
-
         return this;
     }
 
-    _canShowEmoji(emoji) {
-      return emoji.getUnified().length > 4;
-    }
+  /**
+   * Return true is show.
+   *
+   * @param emoji
+   * @returns {boolean}
+   * @private
+   */
+  _filter(emoji) {
+    return emoji.getCharacter().length <= 4;
+  }
 }
