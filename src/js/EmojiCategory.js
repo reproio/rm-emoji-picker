@@ -34,11 +34,10 @@ export default class EmojiCategory {
         /**
          * @type {Array<Emoji>}
          */
-        this.emojis     = data.map(
-            emote => Emoji.factory(emote, this.title, this._onEvent.bind(this))
-        ).sort(
-            (a, b) => a.sort_order - b.sort_order
-        );
+        this.emojis     = data
+          .map(emote => Emoji.factory(emote, this.title, this._onEvent.bind(this)))
+          .filter((emoji) => emoji.getCharacter().length <= 4)
+          .sort((a, b) => a.sort_order - b.sort_order);
 
         /**
          * Markup for the
@@ -141,7 +140,7 @@ export default class EmojiCategory {
             this.$title.addClass('inactive');
             const regexp = new RegExp(this.search_term.toLowerCase());
             this.emojis.forEach(emoji => {
-                if(this._canShowEmoji(emoji) && emoji.matchesSearchTerm(regexp)){
+                if(emoji.matchesSearchTerm(regexp)){
                   emoji.$emoji.show();
                 }
                 else{
@@ -160,23 +159,9 @@ export default class EmojiCategory {
     _clearSearch() {
         this.$title.removeClass('inactive');
         this.emojis.forEach(emoji => {
-            if (this._filter(emoji)) {
-              emoji.$emoji.show();
-            } else {
-              emoji.$emoji.hide();
-            }
+          emoji.$emoji.show();
         });
         return this;
     }
 
-  /**
-   * Return true is show.
-   *
-   * @param emoji
-   * @returns {boolean}
-   * @private
-   */
-  _filter(emoji) {
-    return emoji.getCharacter().length <= 4;
-  }
 }
