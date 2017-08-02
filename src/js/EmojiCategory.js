@@ -67,8 +67,6 @@ export default class EmojiCategory {
                 }
             }
         });
-
-        this._clearSearch();
     }
 
     get offset_top (){
