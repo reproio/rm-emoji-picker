@@ -37,7 +37,6 @@ export default class EmojiPicker {
             this._callback = options;
         }
 
-
         /**
          *
          * @type {Array.<EmojiCategory>}
@@ -404,7 +403,7 @@ export default class EmojiPicker {
     _getCategories() {
         const cats = this.defaults
                          .categories
-                         .map(cat => EmojiCategory.factory(cat, emojis[cat.title], this._dispatchBubble.bind(this)));
+                         .map(cat => EmojiCategory.factory(cat, emojis[cat.title], this._dispatchBubble.bind(this), this.defaults.filter));
 
         cats[0].$category.addClass('first');
         return cats;

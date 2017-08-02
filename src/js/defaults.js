@@ -53,6 +53,11 @@ export default {
     //Callback that occurs when an emoji gets selected. You get back Emoji, EmojiCategory, Node
     callback       : undefined,
 
+    // Filter
+    filter         : function () {
+      return true
+    },
+
     //When the user hovers over the top row of icons, do you want them to be shown
     //a tooltip indicating which category the icon represents?
     show_icon_tooltips : true,

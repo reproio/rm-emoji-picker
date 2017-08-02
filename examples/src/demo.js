@@ -12,7 +12,11 @@ const setupPicker = function(container) {
       twitter: './../sheets/sheet_twitter_64_indexed_128.png',
       emojione: './../sheets/sheet_emojione_64_indexed_128.png'
     },
-    positioning: 'vertical'
+    positioning: 'vertical',
+    filter: function (emoji) {
+      console.log(encodeURIComponent(emoji) ,emoji);
+      return true;
+    }
   });
 
   picker.listenOn(icon, container, input);
@@ -24,9 +28,6 @@ const setupPicker = function(container) {
 };
 
 $(document).ready(() => {
-
-  const contentEdit = document.getElementById('content-edit');
-  const contentPicker = setupPicker(contentEdit);
 
   const contentInput = document.getElementById('content-input');
   const inputPicker = setupPicker(contentInput);

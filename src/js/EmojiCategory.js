@@ -12,14 +12,13 @@ export default class EmojiCategory {
      * @param {Function} callback
      * @returns {EmojiCategory}
      */
-    static factory(cat, data, callback){
-        const category = new EmojiCategory(cat, data);
+    static factory(cat, data, callback, filter){
+        const category = new EmojiCategory(cat, data, filter);
         category.setCallback(callback);
         return category;
     }
 
-    constructor(category, data){
-
+    constructor(category, data, filter){
         /**
          * @type {string}
          */
@@ -36,7 +35,11 @@ export default class EmojiCategory {
          */
         this.emojis     = data
           .map(emote => Emoji.factory(emote, this.title, this._onEvent.bind(this)))
-          .filter((emoji) => emoji.getCharacter().length <= 4)
+          .filter((emoji) => {
+            const result = filter(emoji.getCharacter(), emoji);
+            console.log("result1:", result);
+            return result;
+          })
           .sort((a, b) => a.sort_order - b.sort_order);
 
         /**
@@ -124,6 +127,16 @@ export default class EmojiCategory {
     setCallback(callback){
         this._callback = callback;
         return this;
+    }
+
+    /**
+     *
+     * @param {Function} callback
+     * @returns {EmojiCategory}
+     */
+    setFilter(filter){
+      this._filter = filter;
+      return this;
     }
 
     /**
