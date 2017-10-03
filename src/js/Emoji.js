@@ -165,10 +165,8 @@ export default class Emoji {
      */
     getEmojiForPlatform(){
 
-        const emote = Converters.withEnvironment()
-                                .replace_colons(this.getColons());
+        return this._getWrapper().append(this.getCharacter());
 
-        return this._getWrapper().append(emote);
     }
 
     /**
